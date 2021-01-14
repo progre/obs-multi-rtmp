@@ -1,0 +1,16 @@
+name: CI
+on:
+  push:
+    branches: [ master, ci-playground ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-2019
+    env:
+      OBS_VER: 25.0.8
+    steps:
+      - uses: actions/checkout@v2
+      - run: ci/install.ps1 -OBS_VER "$Env:OBS_VER"
+      - run: ./build.ps1 -OBS_BIN_DIR32 "../OBS-Studio-${Env:OBS_VER}-Full-x86" -OBS_BIN_DIR64 "../OBS-Studio-${Env:OBS_VER}-Full-x64" -OBS_SRC_DIR "../obs-studio-${Env:OBS_VER}"
