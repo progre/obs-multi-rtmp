@@ -12,8 +12,8 @@ Set-PSDebug -Trace 1
 $QTDIR32 = [System.IO.Directory]::GetDirectories("c:/QtDep/", "msvc2017", 1)[0].Replace("\", "/")
 $QTDIR64 = [System.IO.Directory]::GetDirectories("c:/QtDep/", "msvc2017_64", 1)[0].Replace("\", "/")
 
-$ver = (Select-String -Pattern "obs-multi-rtmp VERSION" -Path CMakeLists.txt -Raw)
-$ver = $ver.Split(" ")[2]
+$ver = (Select-String -Pattern "obs-multi-rtmp VERSION" -Path CMakeLists.txt)
+$ver = $ver.Line.Split(" ")[2]
 $ver = $ver.Remove($ver.Length - 1)
 
 Remove-Item -Path build_x86, build_x64, dist, *.zip -Recurse -ErrorAction Ignore
