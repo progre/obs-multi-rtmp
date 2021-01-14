@@ -70,7 +70,7 @@ else ()
     message(FATAL_ERROR "Unsupported OS!")
 endif ()
 
-add_library(obs-multi-rtmp SHARED
+add_library(obs-multi-rtmp OBJECT
     "src/obs-multi-rtmp.cpp"
     "src/obs-multi-rtmp.h"
     "src/edit-widget.cpp"
