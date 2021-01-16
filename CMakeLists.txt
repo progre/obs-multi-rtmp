@@ -89,16 +89,21 @@ if (WIN32)
     )
 endif ()
 target_include_directories(obs-multi-rtmp PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/target/release
     "${OBS_SRC_DIR}/libobs"
     "${OBS_SRC_DIR}/UI/obs-frontend-api"
 )
 target_link_directories(obs-multi-rtmp PRIVATE
     "${CMAKE_CURRENT_BINARY_DIR}"
     ${OBS_BIN_DIR}
+    ${CMAKE_CURRENT_LIST_DIR}/target/release
 )
 target_link_libraries(obs-multi-rtmp PRIVATE
     Qt5::Widgets
     ${LIB_OBS}
+    ${CMAKE_CURRENT_LIST_DIR}/target/release/rust.lib
+    rust.lib
+    rust
     obs-frontend-api
 )
 

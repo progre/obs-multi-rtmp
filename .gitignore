@@ -6,3 +6,7 @@ obs-src/
 *.tar.xz
 *.pkg
 .DS_Store
+
+
+/target
+Cargo.lock

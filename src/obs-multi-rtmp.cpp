@@ -7,6 +7,8 @@
 
 #define ConfigSection "obs-multi-rtmp"
 
+char *rust_function();
+
 QThread* g_uiThread = nullptr;
 
 
@@ -50,7 +52,7 @@ public:
         if (std::string(u8"多路推流") == obs_module_text("Title"))
             layout_->addWidget(new QLabel(u8"本插件免费提供，请不要为此付费。\n作者：雷鸣", container_));
         else
-            layout_->addWidget(new QLabel(u8"This plugin provided free of charge. \nAuthor: SoraYuki", container_));
+            layout_->addWidget(new QLabel(rust_function(), container_));
 
         // load config
         LoadConfig();
