@@ -11,7 +11,7 @@ $obs_bin_url = $OBS_BIN_URL.Replace("#OBS_VER#", "$OBS_VER")
 
 $obs_bin_url_x86 = $obs_bin_url.Replace("#ARCH#", "x86")
 $obs_bin_filename_x86 = $obs_bin_url_x86.Split("/")[-1]
-$obs_bin_dirname_x86 = $obs_bin_filename_x86 -replace "\.[^.]+$", ""
+$obs_bin_dirname_x86 =  $obs_bin_filename_x86 -replace "\.[^.]+$", ""
 
 $obs_bin_url_x64 = $obs_bin_url.Replace("#ARCH#", "x64")
 $obs_bin_filename_x64 = $obs_bin_url_x64.Split("/")[-1]
@@ -34,5 +34,4 @@ Start-FileDownload $obs_src_url -FileName ../$obs_src_filename
 unzip -oqd ../$obs_bin_dirname_x86 ../$obs_bin_filename_x86
 unzip -oqd ../$obs_bin_dirname_x64 ../$obs_bin_filename_x64
 unzip -oqd .. ../$obs_src_filename
-
 & "../obs-studio-$OBS_VER/CI/install-qt-win.cmd"
