@@ -17,8 +17,10 @@ jobs:
         with:
           path: |
             C:/QtDep
-            ${{ env.GITHUB_WORKSPACE }}/..
-          key: ${{ runner.os }}-${{ env.OBS_VER }}-v4
+            ${{ env.GITHUB_WORKSPACE }}/obs-studio-${{ env.OBS_VER }}
+            ${{ env.GITHUB_WORKSPACE }}/OBS-Studio-${{ env.OBS_VER }}-Full-x64
+            ${{ env.GITHUB_WORKSPACE }}/OBS-Studio-${{ env.OBS_VER }}-Full-x86
+          key: ${{ runner.os }}-${{ env.OBS_VER }}-v5
       - if: steps.cacher.outputs.cache-hit != 'true'
         run: ci/install.ps1 -OBS_VER "$Env:OBS_VER"
       - run: ./build.ps1 -OBS_BIN_DIR32 "../OBS-Studio-${Env:OBS_VER}-Full-x86" -OBS_BIN_DIR64 "../OBS-Studio-${Env:OBS_VER}-Full-x64" -OBS_SRC_DIR "../obs-studio-${Env:OBS_VER}"
