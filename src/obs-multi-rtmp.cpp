@@ -164,7 +164,7 @@ OBS_DECLARE_MODULE()
 OBS_MODULE_USE_DEFAULT_LOCALE("obs-multi-rtmp", "en-US")
 OBS_MODULE_AUTHOR("雷鳴 (@sorayukinoyume)")
 
-bool _obs_module_load()
+bool obs_module_load()
 {
     if (obs_get_version() < MAKE_SEMANTIC_VERSION(25, 0, 0))
         return false;
@@ -219,7 +219,7 @@ bool _obs_module_load()
     return true;
 }
 
-const char *_obs_module_description(void)
+const char *obs_module_description(void)
 {
     return "Multiple RTMP Output Plugin";
 }
