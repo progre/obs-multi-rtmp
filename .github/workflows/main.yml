@@ -12,7 +12,13 @@ jobs:
       OBS_VER: 25.0.8
     steps:
       - uses: actions/checkout@v2
-      - run: ci/install.ps1 -OBS_VER "$Env:OBS_VER"
+      - id: cacher
+        uses: actions/cache@v2
+        with:
+          path: C:/QtDep
+          key: ${{ runner.os }}-${{ OBS_VER }}
+      - if: steps.cacher.outputs.cache-hit != 'true'
+        run: ci/install.ps1 -OBS_VER "$Env:OBS_VER"
       - run: ./build.ps1 -OBS_BIN_DIR32 "../OBS-Studio-${Env:OBS_VER}-Full-x86" -OBS_BIN_DIR64 "../OBS-Studio-${Env:OBS_VER}-Full-x64" -OBS_SRC_DIR "../obs-studio-${Env:OBS_VER}"
       - uses: actions/upload-artifact@v2
         with:
