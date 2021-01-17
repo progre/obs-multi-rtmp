@@ -1,15 +1,8 @@
-use std::{
-    ffi::{CString},
-    os::raw::c_char,
-};
-
-use once_cell::sync::Lazy;
-
-static MSG: Lazy<CString> = Lazy::new(|| CString::new("hoge").unwrap());
+use std::os::raw::c_char;
 
 #[no_mangle]
 pub extern "C" fn rust_function() -> *const c_char {
-    MSG.as_ptr()
+    b"hoge\n".as_ptr() as *const c_char
 }
 
 #[cfg(test)]
