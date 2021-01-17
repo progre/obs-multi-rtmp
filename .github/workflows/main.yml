@@ -23,6 +23,10 @@ jobs:
           key: ${{ runner.os }}-${{ env.OBS_VER }}-v6
       - if: steps.cacher.outputs.cache-hit != 'true'
         run: ci/install.ps1 -OBS_VER "$Env:OBS_VER"
+      - uses: actions-rs/toolchain@v1
+        with: { target: i686-pc-windows-msvc }
+      - uses: actions-rs/toolchain@v1
+        with: { target: x86_64-pc-windows-msvc }
       - run: cargo build --target i686-pc-windows-msvc --release
       - run: cargo build --target x86_64-pc-windows-msvc --release
       - run: ./build.ps1 -OBS_BIN_DIR32 "../OBS-Studio-${Env:OBS_VER}-Full-x86" -OBS_BIN_DIR64 "../OBS-Studio-${Env:OBS_VER}-Full-x64" -OBS_SRC_DIR "../obs-studio-${Env:OBS_VER}"
