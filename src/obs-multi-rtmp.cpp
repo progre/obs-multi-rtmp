@@ -7,7 +7,7 @@
 
 #define ConfigSection "obs-multi-rtmp"
 
-char *rust_function();
+extern "C" char *rust_function();
 
 QThread* g_uiThread = nullptr;
 
