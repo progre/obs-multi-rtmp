@@ -21,9 +21,11 @@ if (WIN32)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
         set(PLAT "32bit")
         set(LINK_PLAT "x86")
+        set(RUST_TARGET "i686-pc-windows-msvc")
     elseif (CMAKE_SIZEOF_VOID_P EQUAL 8)
         set(PLAT "64bit")
         set(LINK_PLAT "x64")
+        set(RUST_TARGET "x86_64-pc-windows-msvc")
     else ()
         message(FATAL_ERROR "Unsupported Architecture!")
     endif ()
@@ -89,21 +91,17 @@ if (WIN32)
     )
 endif ()
 target_include_directories(obs-multi-rtmp PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/target/release
     "${OBS_SRC_DIR}/libobs"
     "${OBS_SRC_DIR}/UI/obs-frontend-api"
 )
 target_link_directories(obs-multi-rtmp PRIVATE
     "${CMAKE_CURRENT_BINARY_DIR}"
     ${OBS_BIN_DIR}
-    ${CMAKE_CURRENT_LIST_DIR}/target/release
 )
 target_link_libraries(obs-multi-rtmp PRIVATE
     Qt5::Widgets
     ${LIB_OBS}
-    ${CMAKE_CURRENT_LIST_DIR}/target/release/rust.lib
-    rust.lib
-    rust
+    ${CMAKE_CURRENT_LIST_DIR}/target/${RUST_TARGET}/release/rust.lib
     obs-frontend-api
 )
 
